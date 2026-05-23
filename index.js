@@ -47,13 +47,27 @@ function viewproduct(){
     }
     menu();
 }
+
 // option 3
 function searchproduct(){
     rl.question("Enter your product:",(searchitem) =>{
        let found =product.find(item =>
-        item.name === searchitem.product
+        item.name === searchitem
        )
-       if
+        if(found){
+
+            console.log("Product Found:");
+            console.log(
+                `${found.id}. ${found.name} - ${found.price} - ${found.category}`
+            );
+
+        } else {
+
+            console.log("Product not found");
+
+        }
+
+        menu();
     })
 }
 
@@ -83,12 +97,8 @@ function menu (){
         break;
         
     case "3":
-        if(rl.question===product[]){
-            console.log("")
-        }else{
-            console.log("The product is not present");
-        }
-
+        searchproduct();
+        break;
     case "10":
         console.log ("Thank you using our e-commerce , visit again")
         rl.close();
