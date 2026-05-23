@@ -35,7 +35,7 @@ function addproduct(){
 }
 
 // option 2
-function viewproduct(){
+function viewproduct(){ 
     if (product.length===0){
         console.log("not product is added");
 
