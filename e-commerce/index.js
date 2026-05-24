@@ -8,6 +8,21 @@ const rl = readline.createInterface({
 let product = [ ];
 let cart = [ ];
 
+
+// function product name 
+function productname(){
+    rl.question("enter your product:",(productname)=>{
+        let index = product.find(
+            item => item.name=== productname 
+        )
+        if(index){
+            console.log( `${index.id}. ${index.name} - ${index.price} - ${index.category}`)
+        }else{
+            console.log(" product is not find")
+        }
+       
+    })
+}
 // option 1
 function addproduct(){
 
@@ -26,7 +41,11 @@ function addproduct(){
        };
 
        product.push(newProduct);
-       console.log(product);
+    //    console.log(product);
+     console.log(
+                `${newProduct.id}. ${newProduct.name} - ${newProduct.price} - ${newProduct.category}`
+            );
+
        menu();
 
     })
@@ -50,7 +69,7 @@ function viewproduct(){
 
 // option 3
 function searchproduct(){
-    rl.question("Enter your product:",(searchitem) =>{
+    rl.question("Search your product:",(searchitem) =>{
        let found =product.find(item =>
         item.name === searchitem
        )
@@ -69,8 +88,118 @@ function searchproduct(){
 
         menu();
     })
-}
+} 
+// option 4
+function deleteproduct(){
+    rl.question("Enter your product:",(name)=>{
+        let index =product.findIndex(
+            item => item.name === name );
 
+        if( index!==-1 ){
+
+            product.splice(index,1);
+            console.log(" the product is deleted");
+        }else{
+            console.log(" The product is not found");
+        }
+
+        menu();
+    });
+}
+// option 5
+function editproduct(){
+    rl.question("enter the product to edit:",(searchproduct)=>{
+        let found = product.find(
+            item => item.name === searchproduct )
+            if (found){
+                rl.question("Enter your new product:",(name)=>{
+                rl.question("Enter your new price:",(price)=>{
+                rl.question("Enter your new category:",(category)=>{
+                    
+                        found.name = name;
+                        found.price = Number(price);
+                        found.category = category;
+                        console.log("Product updated successfully");
+
+                        console.log(found);
+
+                        menu();
+
+                })
+                })
+                })
+            }
+    });
+}
+// option 6
+function addcart(){
+    
+    rl.question("enter the product to add cart:",(cartitem)=>{
+        
+        let found =product.find(
+            item => item.name === cartitem
+        );
+        if(found){
+            cart.push(found);
+            console.log("Product added to cart");
+            console.log(cart);
+        }else{
+            console.log(" the product is not found")
+        }
+        menu();
+    });
+}
+// option7
+function viewcart(){
+    if (cart.length === 0){
+        console.log("no product is the cart")
+    }else{
+        console.log("\n=== Cart Items ===");
+        cart.forEach((item, index) => {
+        console.log(`${index + 1}. ${item.name} - ${item.price} - ${item.category}`
+            );
+
+    });
+}
+menu();
+}
+// option 8
+function deletecart(){
+    rl.question("Enter your cart:",(name)=>{
+        let index =cart.findIndex(
+            item => item.name === name );
+
+        if( index!==-1 ){
+
+            cart.splice(index,1);
+            console.log(" the cart product is deleted");
+        }else{
+            console.log(" The cart product is not found");
+        }
+
+        menu();
+    });
+}
+// option 9
+function billcart(){
+    if (cart.length === 0){
+        console.log("no product is the cart")
+    }else{
+        console.log("\n=== Cart Items ===");
+        cart.forEach((item, index) => {
+        console.log(`${index + 1}. ${item.name} - ${item.price} - ${item.category}`
+        );
+        console.log("succesfully bill generated");
+
+    });
+}
+menu();
+}
+// option 10 
+function exittodo(){
+        console.log ("Thank you using our e-commerce , visit again")
+        rl.close();
+}
 
 function menu (){
     console.log ("\n === E-commerce menu ==== ");
@@ -99,9 +228,33 @@ function menu (){
     case "3":
         searchproduct();
         break;
+
+    case "4":
+        deleteproduct();
+        break;
+
+    case "5":
+        editproduct();
+        break;
+        
+    case"6":
+        addcart();
+        break;
+        
+     case"7":
+        viewcart();
+        break;
+
+        case "8":
+        deletecart();
+        break;
+
+        case"9":
+        billcart();
+        break;
+
     case "10":
-        console.log ("Thank you using our e-commerce , visit again")
-        rl.close();
+       exittodo();
         break;
 
   }
