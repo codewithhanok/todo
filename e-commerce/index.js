@@ -31,23 +31,26 @@ function addproduct(){
     
     rl.question("enter your product:",(name)=>{
     rl.question("enter your price:",(price)=>{
+    rl.question("enter your stock:",(stock)=>{
     rl.question("enter your category:",(category)=>{
 
        let newProduct = {
         id : id,
         name : name,
         price:Number(price),
+        stock:stock,
         category:category,
        };
 
        product.push(newProduct);
     //    console.log(product);
      console.log(
-                `${newProduct.id}. ${newProduct.name} - ${newProduct.price} - ${newProduct.category}`
+                `${newProduct.id}. ${newProduct.name} - ${newProduct.price} -${newProduct.stock}- ${newProduct.category}`
             );
 
        menu();
 
+        })
     })
 })
     })
@@ -60,7 +63,7 @@ function viewproduct(){
 
     }else{
         product.forEach((item, index) => {
- console.log (`${index + 1}. ${item.name} - ${item.price} - ${item.category}`)
+ console.log (`${index + 1}. ${item.name} - ${item.price} -${item.stock} - ${item.category}`)
 
         });
     }
@@ -77,7 +80,7 @@ function searchproduct(){
 
             console.log("Product Found:");
             console.log(
-                `${found.id}. ${found.name} - ${found.price} - ${found.category}`
+                `${found.id}. ${found.name} - ${found.price} -${found.stock}- ${found.category}`
             );
 
         } else {
@@ -114,17 +117,19 @@ function editproduct(){
             if (found){
                 rl.question("Enter your new product:",(name)=>{
                 rl.question("Enter your new price:",(price)=>{
+                rl.question("Enter your new category:",(stock)=>{
                 rl.question("Enter your new category:",(category)=>{
                     
                         found.name = name;
                         found.price = Number(price);
+                        found.stock = stock;
                         found.category = category;
                         console.log("Product updated successfully");
 
                         console.log(found);
 
                         menu();
-
+                })
                 })
                 })
                 })
@@ -156,11 +161,12 @@ function viewcart(){
     }else{
         console.log("\n=== Cart Items ===");
         cart.forEach((item, index) => {
-        console.log(`${index + 1}. ${item.name} - ${item.price} - ${item.category}`
+        console.log(`${index + 1}. ${item.name} - ${item.price} -${item.stock} - ${item.category}`
             );
-
-    });
-}
+        });
+    }
+    let totalcart =cart.reduce((sum,item)=>sum + item.stock,0);
+    console.log(`total stock = ${totalcart}`)
 menu();
 }
 // option 8
